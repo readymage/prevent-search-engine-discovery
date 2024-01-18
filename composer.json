@@ -1,0 +1,27 @@
+{
+  "name": "readymage/prevent-search-engine-discovery",
+  "description": "Magento 2 module preventing websites from being discovered and indexed by search engines by accident",
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "keywords": [
+      "magento2",
+      "ReadyMage"
+  ],
+  "require": {
+    "magento/framework": "*"
+  },
+  "license": [
+    "OSL-3.0"
+  ],
+  "support": {
+      "email": "info@scandiweb.com"
+  },
+  "autoload": {
+    "files": [
+      "src/registration.php"
+    ],
+    "psr-4": {
+      "ReadyMage\\PreventSearchEngineDiscovery\\": "src"
+    }
+  }
+}

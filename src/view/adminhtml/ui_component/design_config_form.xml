@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="other_settings">
+        <fieldset name="search_engine_robots">
+            <container
+                name="custom_message"
+                template="ReadyMage_PreventSearchEngineDiscovery/message/message"
+            />
+            <field name="default_robots">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="disabled" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="custom_instructions">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="disabled" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="reset_to_defaults">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="componentDisabled" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+            </field>
+        </fieldset>
+    </fieldset>
+</form>
