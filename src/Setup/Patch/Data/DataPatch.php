@@ -12,7 +12,7 @@ namespace ReadyMage\PreventSearchEngineDiscovery\Setup\Patch\Data;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 
-class Data implements DataPatchInterface
+class DataPatch implements DataPatchInterface
 {
 
     private const CORE_CONFIG_TABLE_NAME = "core_config_data";
@@ -35,18 +35,23 @@ class Data implements DataPatchInterface
         $this->moduleDataSetup = $moduleDataSetup;
     }
 
-    /** {@inheritDoc}
+    /** {@inheritDoc
      */
     public function apply()
     {
-        $where = ['path = ?' => self::CONFIG_PATH_DESIGN_SEARCH_ENGINE_ROBOTS_DEFAULT_ROBOTS];
-        $bind = ['value' => self::CONFIG_PATH_DESIGN_SEARCH_ENGINE_ROBOTS_DEFAULT_ROBOTS_VALUE];
+        $this->moduleDataSetup->getConnection()>startSetup();
+        $tableName = $this->moduleDataSetup->getTable(self::CORE_CONFIG_TABLE_NAME);
 
-        $this->moduleDataSetup->getConnection()->update(
-            $this->moduleDataSetup->getTable(self::CORE_CONFIG_TABLE_NAME),
-            $bind,
-            $where
-        );
+        $data = [
+            'path' => self::CONFIG_PATH_DESIGN_SEARCH_ENGINE_ROBOTS_DEFAULT_ROBOTS,
+            'value' => self::CONFIG_PATH_DESIGN_SEARCH_ENGINE_ROBOTS_DEFAULT_ROBOTS_VALUE
+        ];
+
+        $this->moduleDataSetup
+            ->getConnection()
+            ->insertOnDuplicate($tableName, $data, ['value']);
+
+        $this->moduleDataSetup->getConnection()->endSetup();
     }
 
     /** {@inheritDoc} */
