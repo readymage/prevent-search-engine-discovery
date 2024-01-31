@@ -39,7 +39,7 @@ class DataPatch implements DataPatchInterface
      */
     public function apply()
     {
-        $this->moduleDataSetup->getConnection()>startSetup();
+        $this->moduleDataSetup->startSetup();
         $tableName = $this->moduleDataSetup->getTable(self::CORE_CONFIG_TABLE_NAME);
 
         $data = [
@@ -51,7 +51,7 @@ class DataPatch implements DataPatchInterface
             ->getConnection()
             ->insertOnDuplicate($tableName, $data, ['value']);
 
-        $this->moduleDataSetup->getConnection()->endSetup();
+        $this->moduleDataSetup->endSetup();
     }
 
     /** {@inheritDoc} */
